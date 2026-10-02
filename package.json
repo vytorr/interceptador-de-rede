@@ -1,0 +1,15 @@
+{
+  "name": "monitor-infantil",
+  "version": "1.0.0",
+  "description": "Monitor de acessos da rede (modo ARP + SNI), com painel web. Sem dependências de execução.",
+  "main": "src/main.js",
+  "private": true,
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "dev": "node src/main.js --no-browser",
+    "test": "node --test \"test/*.test.js\""
+  }
+}

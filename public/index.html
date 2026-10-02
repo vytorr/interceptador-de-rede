@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monitor de Rede</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232563eb'/%3E%3Cpath d='M12 3.5 5.5 6v5c0 4 2.8 6.4 6.5 7.5 3.7-1.1 6.5-3.5 6.5-7.5V6z' fill='none' stroke='%23fff' stroke-width='1.7' stroke-linejoin='round'/%3E%3Cpath d='M9 11.5l2.2 2.2L15 10' fill='none' stroke='%23fff' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <!-- Biblioteca de ícones (SVG) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+      <symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></symbol>
+      <symbol id="i-activity" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+      <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+      <symbol id="i-printer" viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></symbol>
+      <symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 4h6a2 2 0 0 1 2 2v14a1.5 1.5 0 0 0-1.5-1.5H2z"/><path d="M22 4h-6a2 2 0 0 0-2 2v14a1.5 1.5 0 0 1 1.5-1.5H22z"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></symbol>
+      <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.6 6.6 0 0 0 21 12.8z"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+      <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 19.5h.01"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
+      <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="5"/><path d="M11.5 11.5 21 2M18 5l2 2M15 8l2 2"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m2 0v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V7"/><path d="M10 11v6M14 11v6"/></symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></symbol>
+      <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 10.6a3 3 0 0 0 4.2 4.2"/><path d="M9.9 5.1A9.8 9.8 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 3.9M6.1 6.1A17 17 0 0 0 2 12s3.5 7 10 7a9.6 9.6 0 0 0 3.9-.8"/></symbol>
+    </defs>
+  </svg>
+
+  <div class="app">
+    <!-- ===== Menu lateral ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <span class="brand-logo"><svg class="icon"><use href="#i-shield-check"/></svg></span>
+        <div class="brand-text">
+          <h1>Monitor de Rede</h1>
+          <span class="brand-sub">Controle de acessos</span>
+        </div>
+      </div>
+
+      <nav class="nav" role="tablist" aria-label="Seções">
+        <button class="nav-item" role="tab" data-tab="overview" aria-selected="true"><svg class="icon"><use href="#i-grid"/></svg><span>Visão geral</span></button>
+        <button class="nav-item" role="tab" data-tab="live"><svg class="icon"><use href="#i-activity"/></svg><span>Registro ao vivo</span></button>
+        <button class="nav-item" role="tab" data-tab="devices"><svg class="icon"><use href="#i-monitor"/></svg><span>Aparelhos</span></button>
+        <button class="nav-item" role="tab" data-tab="blocked"><svg class="icon"><use href="#i-ban"/></svg><span>Bloqueios</span></button>
+        <button class="nav-item" role="tab" data-tab="settings"><svg class="icon"><use href="#i-settings"/></svg><span>Configurações</span></button>
+        <button class="nav-item" role="tab" data-tab="setup"><svg class="icon"><use href="#i-book"/></svg><span>Como funciona</span></button>
+      </nav>
+
+      <div class="sidebar-foot">
+        <span class="watermark">~V</span>
+      </div>
+    </aside>
+
+    <!-- ===== Conteúdo ===== -->
+    <div class="content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-btn menu-toggle" id="menu-toggle" type="button" aria-label="Menu"><svg class="icon"><use href="#i-menu"/></svg></button>
+          <h2 id="page-title">Visão geral</h2>
+        </div>
+        <div class="topbar-right">
+          <button id="btn-copy-ip-top" class="btn" type="button" title="Copiar o endereço do computador">
+            <svg class="icon"><use href="#i-copy"/></svg> Copiar IP: <strong class="ip-primary">--</strong>
+          </button>
+          <button id="privacy-toggle" class="icon-btn" type="button" aria-label="Ocultar dados sensíveis" title="Ocultar dados sensíveis (ex.: IP) — útil para gravar vídeos"><svg class="icon"><use href="#i-eye"/></svg></button>
+          <button id="theme-toggle" class="icon-btn" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon"><use href="#i-moon"/></svg></button>
+          <span id="dns-status" class="pill">Conectando…</span>
+        </div>
+      </header>
+
+      <div class="filters" id="filters">
+        <label>Período
+          <select id="f-period">
+            <option value="hoje">Hoje</option>
+            <option value="ontem">Ontem</option>
+            <option value="24h">Últimas 24 horas</option>
+            <option value="7d">Últimos 7 dias</option>
+            <option value="30d">Últimos 30 dias</option>
+          </select>
+        </label>
+        <label>Aparelho
+          <select id="f-device"><option value="">Todos os aparelhos</option></select>
+        </label>
+        <label class="search-field">Buscar site ou app
+          <span class="search-wrap"><svg class="icon"><use href="#i-search"/></svg><input type="search" id="f-search" placeholder="Ex.: roblox, youtube, tigrinho..."></span>
+        </label>
+        <label class="check"><input type="checkbox" id="f-ads"> Mostrar log de anúncios</label>
+      </div>
+
+      <main>
+        <!-- Visão geral -->
+        <section id="tab-overview" class="tab-panel">
+          <div id="print-header" aria-hidden="true">
+            <strong>Monitor de Rede</strong> — Relatório de acessos
+            <span id="print-when"></span>
+          </div>
+          <div id="no-devices" class="card notice" hidden>
+            <h2><svg class="card-icon"><use href="#i-wifi"/></svg> <span>Aguardando atividade dos aparelhos</span></h2>
+            <p>O monitor está ativo e acompanhando a rede automaticamente. Assim que um aparelho da casa navegar, os acessos começam a aparecer aqui.</p>
+            <p><a href="#" data-goto="setup" class="primary btn-lg">Ver como funciona</a></p>
+          </div>
+
+          <div class="tiles">
+            <button type="button" class="tile" data-jump="timeline-card" title="Ver os horários de maior atividade">
+              <span class="tile-icon accent"><svg class="icon"><use href="#i-clock"/></svg></span>
+              <div class="tile-body"><span class="tile-label">Tempo de uso hoje</span><span class="tile-value" id="t-minutes">–</span><span class="tile-hint">minutos com navegação ativa</span></div>
+            </button>
+            <button type="button" class="tile" data-jump="sites-card" title="Ver a lista completa de sites e apps">
+              <span class="tile-icon info"><svg class="icon"><use href="#i-globe"/></svg></span>
+              <div class="tile-body"><span class="tile-label">Sites e apps acessados</span><span class="tile-value" id="t-sites">–</span><span class="tile-hint">endereços diferentes</span></div>
+            </button>
+            <button type="button" class="tile tile-alert" data-jump="alerts-card" title="Ver os alertas de segurança">
+              <span class="tile-icon danger"><svg class="icon"><use href="#i-alert"/></svg></span>
+              <div class="tile-body"><span class="tile-label">Sites inadequados</span><span class="tile-value" id="t-alerts">–</span><span class="tile-hint">adulto, apostas ou arriscado</span></div>
+            </button>
+            <button type="button" class="tile" data-jump="sites-card" title="Ver os acessos barrados na lista de sites">
+              <span class="tile-icon good"><svg class="icon"><use href="#i-shield-check"/></svg></span>
+              <div class="tile-body"><span class="tile-label">Acessos bloqueados</span><span class="tile-value" id="t-blocked">–</span><span class="tile-hint">barrados com segurança</span></div>
+            </button>
+          </div>
+
+          <div id="day-insight" class="insight" hidden>
+            <svg class="icon" id="insight-icon"><use href="#i-shield-check"/></svg>
+            <span id="insight-text"></span>
+          </div>
+
+          <div class="card" id="alerts-card">
+            <h2><svg class="card-icon danger" id="alerts-icon"><use href="#i-alert"/></svg> <span>Alertas de segurança</span></h2>
+            <p class="muted" id="alerts-empty">Nenhum acesso a conteúdo adulto, apostas ou sites perigosos neste período.</p>
+            <div class="table-wrap"><table id="alerts-table" hidden>
+              <thead><tr><th>Site ou jogo</th><th>Classificação</th><th>Aparelho</th><th class="num">Minutos</th><th>Primeiro acesso</th><th>Último acesso</th><th>Ação</th></tr></thead>
+              <tbody></tbody>
+            </table></div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card" id="timeline-card">
+              <h2><svg class="card-icon"><use href="#i-activity"/></svg> <span id="timeline-title">Horários de maior atividade</span></h2>
+              <p class="muted small">Minutos com navegação em cada intervalo.</p>
+              <div id="timeline" class="timeline" role="img"></div>
+            </div>
+            <div class="card">
+              <h2><svg class="card-icon"><use href="#i-folder"/></svg> <span>O que mais acessam</span></h2>
+              <p class="muted small">Distribuição do tempo por categoria.</p>
+              <div id="categories" class="hbars"></div>
+            </div>
+          </div>
+
+          <div class="card" id="sites-card">
+            <h2><svg class="card-icon"><use href="#i-globe"/></svg> <span>Todos os sites e aplicativos usados</span>
+              <button id="btn-export-sites" class="btn btn-ghost" type="button" title="Baixar esta lista em CSV (abre no Excel)"><svg class="icon"><use href="#i-copy"/></svg> Baixar CSV</button></h2>
+            <p class="muted small">Lista completa de acessos. Você pode corrigir a categoria ou bloquear qualquer site.</p>
+            <div class="table-wrap"><table id="sites-table">
+              <thead><tr><th>Site ou jogo</th><th>Categoria</th><th>Aparelho</th><th class="num">Minutos</th><th>Último acesso</th><th>Ação</th></tr></thead>
+              <tbody></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <!-- Registro ao vivo -->
+        <section id="tab-live" class="tab-panel" hidden>
+          <div class="card">
+            <h2><svg class="card-icon"><use href="#i-activity"/></svg> <span>O que estão acessando agora</span> <span class="live-badge">ao vivo</span>
+              <button id="btn-export-live" class="btn btn-ghost" type="button" title="Baixar o registro completo deste período em CSV (abre no Excel)"><svg class="icon"><use href="#i-copy"/></svg> Baixar CSV</button></h2>
+            <p class="muted small">Atualiza sozinho a cada poucos segundos. Mostra os sites e apps que os aparelhos estão consultando.</p>
+            <div class="table-wrap"><table id="live-table">
+              <thead><tr><th>Horário</th><th>Aparelho</th><th>Endereço acessado</th><th>Categoria</th><th>Status</th></tr></thead>
+              <tbody></tbody>
+            </table></div>
+            <div class="pager" id="live-pager" hidden></div>
+          </div>
+        </section>
+
+        <!-- Aparelhos -->
+        <section id="tab-devices" class="tab-panel" hidden>
+          <div class="card">
+            <h2><svg class="card-icon"><use href="#i-monitor"/></svg> <span>Dispositivos monitorados</span></h2>
+            <p class="muted small">Atribua um nome a cada dispositivo para identificá-lo com facilidade. Use a lixeira para remover sessões antigas que não são mais usadas.</p>
+            <div class="table-wrap"><table id="devices-table">
+              <thead><tr><th>Nome do aparelho</th><th>Endereço IP</th><th>Identificador</th><th class="num">Acessos (24h)</th><th>Última atividade</th><th></th></tr></thead>
+              <tbody></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <!-- Bloqueios -->
+        <section id="tab-blocked" class="tab-panel" hidden>
+          <div class="card">
+            <h2><svg class="card-icon"><use href="#i-key"/></svg> <span>Bloquear por palavra</span></h2>
+            <p class="muted small">Digite uma palavra e <strong>qualquer site que a contenha no endereço será bloqueado</strong>. Ex.: <em>porn</em> bloqueia pornhub.com, pt.pornhub.com, porn-cdn.net…</p>
+            <form id="keyword-form" class="kw-form">
+              <input type="text" id="keyword-input" placeholder="Ex.: porn" maxlength="40" autocomplete="off">
+              <button type="submit" class="primary">Adicionar</button>
+            </form>
+            <div id="keyword-list" class="kw-list"></div>
+            <p class="muted small" id="keyword-empty" hidden>Nenhuma palavra cadastrada.</p>
+          </div>
+
+          <div class="card">
+            <h2><svg class="card-icon"><use href="#i-ban"/></svg> <span>Sites e aplicativos proibidos</span></h2>
+            <p class="muted small">Sites desta lista não abrem no dispositivo monitorado.</p>
+            <p class="muted" id="blocked-empty">Nenhum site bloqueado manualmente no momento.</p>
+            <div class="table-wrap"><table id="blocked-table" hidden>
+              <thead><tr><th>Site</th><th>Categoria</th><th>Ação</th></tr></thead>
+              <tbody></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <!-- Configurações -->
+        <section id="tab-settings" class="tab-panel" hidden>
+          <form class="card form" id="settings-form">
+            <h2><svg class="card-icon"><use href="#i-settings"/></svg> <span>Regras de proteção automática</span></h2>
+            <label class="check"><input type="checkbox" name="autoBlockAlerts">
+              <span><strong>Bloquear automaticamente conteúdo adulto e apostas</strong>
+              <span class="muted small block">Impede que páginas de pornografia, "tigrinho" ou cassinos abram no dispositivo monitorado.</span></span></label>
+            <label class="check"><input type="checkbox" name="blockAds">
+              <span><strong>Bloquear anúncios em apps, jogos e sites</strong>
+              <span class="muted small block">Barra as redes de anúncios — incluindo banners impróprios que aparecem em jogos "grátis". Também deixa a navegação mais leve.</span></span></label>
+            <label class="check"><input type="checkbox" name="forceSafeSearch">
+              <span><strong>Forçar Pesquisa Segura no Google e modo restrito no YouTube</strong>
+              <span class="muted small block">Esconde termos adultos, imagens impróprias e vídeos para maiores nas buscas.</span></span></label>
+            <label class="check"><input type="checkbox" name="onlineCheck">
+              <span><strong>Análise inteligente contra novos perigos</strong>
+              <span class="muted small block">Verifica sites desconhecidos com um filtro de segurança externo.</span></span></label>
+            <label>Servidores de internet padrão (saída segura)
+              <input type="text" name="upstreamDns" placeholder="1.1.1.1, 8.8.8.8"></label>
+            <label>Guardar histórico por quantos dias?
+              <input type="number" name="retentionDays" min="1" max="365"></label>
+            <div class="form-actions"><button type="submit" class="primary">Salvar configurações</button><span id="settings-msg" class="muted small" role="status"></span></div>
+          </form>
+
+          <div class="card danger-zone">
+            <h2><svg class="card-icon danger"><use href="#i-trash"/></svg> <span>Começar do zero</span></h2>
+            <p class="muted small">Apaga permanentemente todo o histórico de acessos (sites, horários e alertas). As classificações e os nomes dos aparelhos são mantidos. Esta ação <strong>não pode ser desfeita</strong>.</p>
+            <div class="form-actions">
+              <button type="button" id="btn-clear-logs" class="btn-danger"><svg class="icon"><use href="#i-trash"/></svg> Limpar histórico</button>
+              <span id="clear-msg" class="muted small" role="status"></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Como funciona -->
+        <section id="tab-setup" class="tab-panel" hidden>
+          <div class="card prose">
+            <h2><svg class="card-icon"><use href="#i-book"/></svg> <span>Como funciona</span></h2>
+            <p>O monitoramento é <strong>automático</strong>. Nenhuma configuração é necessária nos aparelhos — basta manter este computador ligado com o Monitor aberto. Assim que o programa inicia, ele já passa a acompanhar os dispositivos conectados à <strong>mesma rede Wi-Fi</strong>.</p>
+
+            <div id="live-connect-status" class="connect-status-box waiting">
+              <div class="connect-status-info">
+                <span class="pulse-dot"></span>
+                <div>
+                  <strong id="connect-status-text">Procurando aparelhos na rede...</strong>
+                  <p class="muted small" id="connect-status-sub">Assim que um aparelho navegar, ele aparece aqui e na Visão geral.</p>
+                </div>
+              </div>
+              <button class="btn" onclick="refresh()" type="button">Atualizar</button>
+            </div>
+
+            <div class="wizard-grid">
+              <div class="wizard-card">
+                <div>
+                  <h3><span class="step-num">1</span> Deixe o computador ligado</h3>
+                  <p class="small">Mantenha este computador <strong>ligado e com o Monitor aberto</strong> enquanto quiser acompanhar os acessos. Pode minimizar a janela — ele continua trabalhando.</p>
+                </div>
+              </div>
+
+              <div class="wizard-card">
+                <div>
+                  <h3><span class="step-num">2</span> Os aparelhos usam o Wi-Fi normalmente</h3>
+                  <p class="small">Os aparelhos usam o Wi-Fi normalmente. O Monitor acompanha os acessos <strong>sozinho</strong>, sem precisar instalar ou configurar nada nos dispositivos.</p>
+                </div>
+              </div>
+
+              <div class="wizard-card">
+                <div>
+                  <h3><span class="step-num">3</span> Acompanhe e bloqueie</h3>
+                  <p class="small">Os acessos aparecem na <a href="#" data-goto="overview">Visão geral</a>, com o nome real de cada site e alertas para conteúdo impróprio. Dê um nome a cada aparelho na aba <a href="#" data-goto="devices">Aparelhos</a> e bloqueie o que quiser em <a href="#" data-goto="blocked">Bloqueios</a>.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="setup-notice">
+              <strong>Bom saber:</strong>
+              <ul>
+                <li>O computador precisa ficar <strong>ligado, com o Monitor aberto</strong>, enquanto os aparelhos estiverem em uso.</li>
+                <li>Para mais estabilidade, ligue o computador à internet por <strong>cabo de rede</strong>.</li>
+                <li>O monitor vê o que passa pelo <strong>Wi-Fi de casa</strong>. Uso por <strong>dados móveis (4G/5G)</strong> ou outra rede não é registrado.</li>
+              </ul>
+            </div>
+
+            <div class="setup-fix">
+              <svg class="icon"><use href="#i-wifi"/></svg>
+              <div>
+                <strong>Se um celular ficar sem internet ao fechar o Monitor</strong>
+                <p class="small">Depois de fechar a janela do Monitor, <strong>é raro</strong>, mas pode acontecer de um aparelho ficar sem internet. Se isso ocorrer, a solução é simples e imediata: <strong>desligue e ligue o Wi-Fi do celular</strong> — a conexão volta na hora.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+
+  <!-- Paleta de comandos (Ctrl+K) -->
+  <div id="cmdk" class="cmdk" hidden>
+    <div class="cmdk-box" role="dialog" aria-label="Ações rápidas" aria-modal="true">
+      <div class="cmdk-input-wrap">
+        <svg class="icon"><use href="#i-search"/></svg>
+        <input id="cmdk-input" type="text" placeholder="Buscar abas, ações ou pesquisar no registro..." autocomplete="off" spellcheck="false" aria-label="Buscar ações">
+        <kbd class="cmdk-kbd">Esc</kbd>
+      </div>
+      <ul id="cmdk-list" class="cmdk-list" role="listbox"></ul>
+      <div class="cmdk-foot"><span><kbd>↑</kbd><kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>1</kbd>–<kbd>6</kbd> trocar de aba</span><span><kbd>Ctrl</kbd>+<kbd>K</kbd> abre isto</span></div>
+    </div>
+  </div>
+  <div class="sidebar-scrim" id="sidebar-scrim" hidden></div>
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+============================================================
+   MONITOR DE REDE  —  Como instalar e usar
+============================================================
+
+É muito simples. São só 2 passos.
+
+
+PASSO 1 — INSTALAR (só na primeira vez)
+------------------------------------------------------------
+0. Se você baixou em um arquivo .zip, primeiro EXTRAIA (clique
+   com o botão direito -> "Extrair tudo") para uma pasta, por
+   exemplo na Área de Trabalho. Depois entre nessa pasta.
+
+1. Clique duas vezes no arquivo:   INSTALAR.bat
+
+2. Se o Windows mostrar uma tela azul "O Windows protegeu o
+   seu computador", clique em "Mais informações" e depois no
+   botão "Executar assim mesmo".
+
+3. Quando aparecer a pergunta "Deseja permitir...?", clique
+   em SIM.
+
+4. Pronto. Ele instala tudo sozinho (pode demorar alguns
+   minutos e precisa de internet). No final, cria um atalho
+   chamado "Monitor de Rede" na Área de Trabalho e já abre
+   o programa.
+
+
+PASSO 2 — USAR (no dia a dia)
+------------------------------------------------------------
+1. Clique duas vezes no atalho "Monitor de Rede" na Área de
+   Trabalho.
+
+2. Clique em SIM quando o Windows pedir permissão.
+
+3. O painel abre sozinho no navegador. Deixe a janela preta
+   aberta enquanto quiser acompanhar.
+
+   -> Para parar de monitorar, basta fechar a janela preta.
+
+
+DICAS
+------------------------------------------------------------
+- O computador precisa ficar ligado, com o Monitor aberto,
+  para acompanhar os aparelhos.
+- Funciona com os celulares na MESMA rede Wi-Fi da casa.
+- Nada precisa ser instalado ou configurado nos celulares.
+- No painel, a aba "Bloqueios" permite proibir sites, e em
+  "Configurações" dá para bloquear anúncios e conteúdo
+  adulto automaticamente (já vem ligado).
+
+Qualquer problema, tire uma foto da tela e envie para quem
+te passou o programa.
+============================================================

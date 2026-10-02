@@ -1,0 +1,10 @@
+node_modules/
+build/
+dist/
+*.db
+*.db-wal
+*.db-shm
+*.zip
+*.log
+__pycache__/
+*.pyc
