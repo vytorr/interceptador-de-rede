@@ -1,4 +1,4 @@
-# Monitor de Rede
+# Monitor/Interceptador de Rede
 
 Monitor de rede local para Windows, voltado a **controle parental na própria
 rede de casa**. Num painel web, mostra quais **sites e aplicativos** os aparelhos
